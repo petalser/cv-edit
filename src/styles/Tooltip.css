@@ -1,0 +1,46 @@
+.c-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  color: white;
+  background-color: darkgreen;
+  font-weight: bold;
+  line-height: 1.2rem;
+
+  display: grid;
+  grid-template-columns: repeat(6, 50px);
+}
+
+.c-tooltip > * {
+  padding: 0 0 0.2rem 1rem;
+  margin: 0;
+}
+
+.c-text-upper {
+  grid-column: 1 / span 5;
+  padding-top: 0.3rem;
+}
+
+span {
+  color: lightgray;
+}
+
+.c-text-lower {
+  grid-column: 2 / span 5;
+}
+
+.symbol {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.close {
+  color: white;
+  background-color: transparent;
+  outline: none;
+}
+
+.arrow {
+  grid-row: 2;
+}
