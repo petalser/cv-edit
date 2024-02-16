@@ -1,4 +1,4 @@
-# PASSWORDSTASH
+# CV editor
 
 ---
 
@@ -19,7 +19,8 @@ Frontend dev's CV editor. What should it look like? Like page with Bootstrap sty
 
 ## Requirements
 
-[]-- Edit any field (including section titles). Every item on "Projects"
-section has to be a card;
-[]-- Copy blank or filled JSON to clipboard;
-[]-- Paste user's (or default) JSON to be parsed;
+- [ ] Edit any field (including section titles). Every item on "Projects"
+      section has to be a card;
+- [ ] Copy blank or filled JSON to clipboard;
+- [ ] Paste user's (or default) JSON to be parsed;
+- [ ] export to PDF;
