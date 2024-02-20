@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 CV-bootstrap
-apps
+src/apps/
