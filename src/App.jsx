@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { data } from "./signals/data";
 import Input from "./components/Input";
 import Panel from "./components/Panel";
 import Tooltip from "./components/Tooltip";
+import { showInput } from "./utils/showInput";
 
 function App() {
   const [panel, setPanel] = useState(false);
@@ -31,11 +33,15 @@ function App() {
       <main className="container">
         <header className="row">
           <div className="col-md-7 text-start">
-            <h1 style={{ fontSize: "2rem" }}>
-              <Input text={"Олександр Петричук"} placeholder={"Name"} />
+            <h1
+              style={{ fontSize: "2rem" }}
+              id="name"
+              onClick={(e) => showInput(e)}
+            >
+              {data.value.name.value}
             </h1>
-            <h4>
-              <Input text={"Фронт-енд розробник"} placeholder={"Role"} />
+            <h4 id="role" onClick={(e) => showInput(e)}>
+              {data.value.role.value}
             </h4>
             <p>
               <strong>

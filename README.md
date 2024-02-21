@@ -16,6 +16,7 @@ Frontend dev's CV editor. What should it look like? Like page with Bootstrap sty
 
 - **React.js**;
 - **Bootstrap** for styling;
+- **Signals** for state management;
 
 ## Requirements
 
@@ -23,4 +24,4 @@ Frontend dev's CV editor. What should it look like? Like page with Bootstrap sty
       section has to be a card;
 - [ ] Copy blank or filled JSON to clipboard;
 - [ ] Paste user's (or default) JSON to be parsed;
-- [ ] export to PDF;
+- [ ] Export to PDF;
