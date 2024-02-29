@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { data } from "./signals/data";
-import Input from "./components/Input";
+import { signalData } from "./signals/data";
 import Panel from "./components/Panel";
 import Tooltip from "./components/Tooltip";
 import { showInput } from "./utils/showInput";
 
+const data = signalData.value;
+
 function App() {
   const [panel, setPanel] = useState(false);
   const [tooltip, setTooltip] = useState(true);
+  const [exportStatus, setExportStatus] = useState(true);
 
   useEffect(() => {
     const showPanel = (e) => {
@@ -30,7 +32,7 @@ function App() {
     <>
       {tooltip && <Tooltip setter={setTooltip} />}
       {panel && <Panel />}
-      <main className="container">
+      <main id="pageContent" className="container">
         <header className="row">
           <div className="col-md-7 text-start">
             <h1
@@ -38,37 +40,44 @@ function App() {
               id="name"
               onClick={(e) => showInput(e)}
             >
-              {data.value.name.value}
+              {data.name.value}
             </h1>
             <h4 id="role" onClick={(e) => showInput(e)}>
-              {data.value.role.value}
+              {data.role.value}
             </h4>
-            <p>
-              <strong>
-                <Input text={"ХНТУСГ"} placeholder={"Education"} />
-              </strong>
+            <p id="education" onClick={(e) => showInput(e)}>
+              <strong>{data.education.value}</strong>
             </p>
           </div>
 
           <div className="col-md-5 text-end">
-            <a href="petrichuck.a@gmail.com" className="">
-              petrichuck.a@gmail.com
+            <a
+              id="link_1"
+              // style={{ color: "blue", textDecoration: "underline" }}
+              // href={exportStatus ? data.link_1.value : null}
+              onClick={(e) => showInput(e)}
+            >
+              {data.link_1.value}
             </a>
             <br />
             <a
-              href="https://github.com/petalser"
+              href={exportStatus ? data.link_2.value : null}
+              style={{ color: "blue", textDecoration: "underline" }}
+              onClick={(e) => showInput(e)}
               target="_blank"
               rel="noreferrer"
             >
-              github.com/petalser
+              {data.link_2.value}
             </a>
             <br />
             <a
-              href="https://www.linkedin.com/in/oleksandr-petrychuk/"
+              href={exportStatus ? data.link_3.value : null}
+              style={{ color: "blue", textDecoration: "underline" }}
+              onClick={(e) => showInput(e)}
               target="_blank"
               rel="noreferrer"
             >
-              linkedin.com/in/oleksandr-petrychuk
+              {data.link_3.value}
             </a>
           </div>
         </header>

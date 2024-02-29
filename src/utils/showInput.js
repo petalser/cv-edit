@@ -1,12 +1,13 @@
-import { data } from "../signals/data";
+import { signalData } from "../signals/data";
 
 export const showInput = (e) => {
   const inputField = document.createElement("input");
-  const parent = e.target.id;
+  const parentId = e.target.id;
+  const parent = signalData.value[parentId];
 
-  inputField.value = data.value[parent].value;
-  inputField.placeholder = data.value[parent].description;
   inputField.type = "text";
+  inputField.value = parent.value;
+  inputField.placeholder = parent.description;
 
   e.target.textContent = "";
 
@@ -15,7 +16,7 @@ export const showInput = (e) => {
   inputField.focus();
 
   const inputListener = () => {
-    data.value[parent].value = inputField.value;
+    parent.value = inputField.value;
   };
 
   const blurListener = () => {
@@ -23,7 +24,7 @@ export const showInput = (e) => {
     inputField.removeEventListener("blur", blurListener);
 
     e.target.removeChild(inputField);
-    e.target.textContent = data.value[parent].value;
+    e.target.textContent = parent.value;
   };
 
   inputField.addEventListener("input", inputListener);
