@@ -1,9 +1,11 @@
 import { signalData } from "../signals/data";
 
+const data = signalData.value;
+
 export const showInput = (e) => {
   const inputField = document.createElement("input");
   const parentId = e.target.id;
-  const parent = signalData.value[parentId];
+  const parent = data[parentId];
 
   inputField.type = "text";
   inputField.value = parent.value;

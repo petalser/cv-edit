@@ -1,38 +1,33 @@
-import { useState, useEffect } from "react";
 import { signalData } from "./signals/data";
+import { isPanelEnabled, isTooltipEnabled, isExported } from "./signals/states";
 import Panel from "./components/Panel";
 import Tooltip from "./components/Tooltip";
 import { showInput } from "./utils/showInput";
+import { useSignals } from "@preact/signals-react/runtime";
+import { effect } from "@preact/signals-react";
 
 const data = signalData.value;
 
 function App() {
-  const [panel, setPanel] = useState(false);
-  const [tooltip, setTooltip] = useState(true);
-  const [exportStatus, setExportStatus] = useState(true);
+  useSignals();
 
-  useEffect(() => {
-    const showPanel = (e) => {
-      setPanel(e.clientX < 40);
+  effect(() => {
+    const tooltipTrigger = (event) => {
+      isPanelEnabled.value = event.clientX < 30;
     };
-    window.addEventListener("mousemove", showPanel);
+
+    window.addEventListener("mousemove", tooltipTrigger);
 
     return () => {
-      removeEventListener("mousemove", showPanel);
+      window.removeEventListener("mousemove", tooltipTrigger);
     };
   });
 
-  useEffect(() => {
-    if (panel) {
-      setTooltip(false);
-    }
-  }, [panel]);
-
   return (
     <>
-      {tooltip && <Tooltip setter={setTooltip} />}
-      {panel && <Panel />}
-      <main id="pageContent" className="container">
+      {isTooltipEnabled.value && <Tooltip />}
+      {isPanelEnabled.value && <Panel />}
+      <main id="pageContent" className={`container`}>
         <header className="row">
           <div className="col-md-7 text-start">
             <h1
@@ -51,34 +46,17 @@ function App() {
           </div>
 
           <div className="col-md-5 text-end">
-            <a
-              id="link_1"
-              // style={{ color: "blue", textDecoration: "underline" }}
-              // href={exportStatus ? data.link_1.value : null}
-              onClick={(e) => showInput(e)}
-            >
+            <span id="link_1" onClick={(e) => showInput(e)}>
               {data.link_1.value}
-            </a>
+            </span>
             <br />
-            <a
-              href={exportStatus ? data.link_2.value : null}
-              style={{ color: "blue", textDecoration: "underline" }}
-              onClick={(e) => showInput(e)}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <span id="link_2" onClick={(e) => showInput(e)}>
               {data.link_2.value}
-            </a>
+            </span>
             <br />
-            <a
-              href={exportStatus ? data.link_3.value : null}
-              style={{ color: "blue", textDecoration: "underline" }}
-              onClick={(e) => showInput(e)}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <span id="link_3" onClick={(e) => showInput(e)}>
               {data.link_3.value}
-            </a>
+            </span>
           </div>
         </header>
 

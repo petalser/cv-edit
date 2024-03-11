@@ -1,5 +1,6 @@
 import { signalData } from "../signals/data";
 import html2pdf from "html2pdf.js";
+import { isExported } from "../signals/states";
 
 const user = signalData.value.name.value;
 const name = user.split(" ").join("_");
@@ -24,7 +25,7 @@ const Save2PDFButton = () => {
   };
 
   return (
-    <button className="btn" onClick={handleSave}>
+    <button className="btn" onClick={handleSave} disabled={isExported.value}>
       Save as PDF
     </button>
   );

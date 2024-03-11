@@ -1,5 +1,9 @@
+import { isTooltipEnabled } from "../signals/states";
+import { useSignals } from "@preact/signals-react/runtime";
 import "../styles/Tooltip.css";
-const Tooltip = ({ setter }) => {
+
+const Tooltip = () => {
+  useSignals();
   return (
     <div className="c-tooltip">
       <p className="c-text-upper">
@@ -9,7 +13,7 @@ const Tooltip = ({ setter }) => {
       <button
         className="symbol close"
         onClick={() => {
-          setter(false);
+          isTooltipEnabled.value = false;
         }}
       >
         &times;
