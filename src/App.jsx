@@ -61,54 +61,67 @@ function App() {
         </header>
 
         <section className="row m-auto">
-          <h4 className="text-center">Про мене</h4>
-          <p className="text-center">
-            У розробці приблизно з 2020-2021рр. Наразі поєдную парт-тайм
-            розробку з роботою поза IT. Шукаю посаду фронт-енда (або навіть
-            фул-стек трейні) на повний день. Маю інвалідність (бронь від
-            призову,вільний виїзд/в&#39;їзд). Також це плюс з точки зору КЗпП
+          <h4
+            id="summaryTitle"
+            className="text-center"
+            onClick={(e) => showInput(e)}
+          >
+            {data.summaryTitle.value}
+          </h4>
+          <p
+            id="summaryText"
+            className="text-center"
+            onClick={(e) => showInput(e)}
+          >
+            {data.summaryText.value}
           </p>
         </section>
 
         <section className="row">
           <div className="col-md-7">
-            <h4>Мій арсенал</h4>
-            <p>
-              <strong>HTML5/CSS3 </strong>
-              Bootstrap, Tailwind, SASS, LESS, CSS modules
-              <br />
-              <strong>Javascript/Typescript </strong>
-              ES6+, npm, React.js, React Styled comp-s, React-redux (+toolkit),
-              Node.js (Express.js, MongoDB)
-              <br />
-              <strong>Python </strong>
-              Django, tkinter, pyQT
-              <br />
-            </p>
+            <h4 id="stackTitle" onClick={(e) => showInput(e)}>
+              {data.stackTitle.value}
+            </h4>
+
+            {data.stackList.values.map((item, key) => {
+              console.log(key);
+              return (
+                <p key={key} className="mb-0">
+                  <strong>{item[0]}</strong>
+                  {/* add whitespace */}
+                  {` ${item[1]}`}
+                  <br />
+                </p>
+              );
+            })}
           </div>
 
           <div className="col-md-5 text-end">
-            <h4>Мої мови</h4>
-            <p>
-              <strong>Англійська</strong> (C1, сертифікат)
-              <br />
-              <strong>Українська</strong> (C2)
-              <br />
-              <strong>Російська</strong> (C2)
-              <br />
-              <strong>Польська</strong> (B1)
-            </p>
+            <h4 id="langTitle" onClick={(e) => showInput(e)}>
+              {data.langTitle.value}
+            </h4>
+            {data.langkList.values.map((item, key) => {
+              return (
+                <p key={key} className="mb-0">
+                  <strong>{item[0]}</strong>
+                  {/* add whitespace and brackets */}
+                  {` (${item[1]})`}
+                  <br />
+                </p>
+              );
+            })}
           </div>
         </section>
 
         <section>
           <div className="row">
             <div className="col-md-12 text-center">
-              <h4>Проєкти</h4>
-              <p>
-                Протягом останніх кількох років я брав участь у різних проєктах,
-                а також побудував кілька власноруч. Наприклад:
-              </p>
+              <h4 id="projectsTitle" onClick={(e) => showInput(e)}>
+                {data.projectsTitle.value}
+              </h4>{" "}
+              <span id="projectsSummary" onClick={(e) => showInput(e)}>
+                {data.projectsSummary.value}
+              </span>
             </div>
           </div>
 
