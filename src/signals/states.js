@@ -6,6 +6,8 @@ export const isTooltipEnabled = signal(true);
 
 export const isExported = signal(false);
 
+export const isModalEnabled = signal(false);
+
 effect(() => {
   if (isExported.value) {
     setTimeout(() => {
