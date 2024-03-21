@@ -8,7 +8,7 @@ import Tooltip from "./components/Tooltip";
 import { showInput } from "./utils/showInput";
 import { useSignals } from "@preact/signals-react/runtime";
 import { effect } from "@preact/signals-react";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Panel = React.lazy(() => import("./components/Panel"));
@@ -18,6 +18,9 @@ const data = signalData.value;
 
 function App() {
   useSignals();
+
+  const [dataProps, setDataProps] = useState(null);
+  const [modalType, setModalType] = useState("dynamic");
 
   effect(() => {
     const tooltipTrigger = (event) => {
@@ -31,12 +34,21 @@ function App() {
     };
   });
 
+  const handleShowCard = (obj, type) => {
+    isModalEnabled.value = true;
+    setDataProps(obj);
+    setModalType(type);
+    console.log("DataProps: " + JSON.stringify(obj));
+  };
+
   return (
     <>
       <Suspense fallback={<div>Loading</div>}>
         <Modal
           show={isModalEnabled.value}
           onHide={() => (isModalEnabled.value = false)}
+          dataProps={dataProps}
+          modalType={modalType}
         />
         {isPanelEnabled.value && <Panel />}
       </Suspense>
@@ -145,7 +157,11 @@ function App() {
           </div>
 
           <div className="row d-flex">
-            <div id="project_1" className="col">
+            <div
+              id="project_1"
+              className="col"
+              onClick={() => handleShowCard(data.project_1, "static")}
+            >
               <h4 className="card-title">PasswordStash</h4>
               <p className="card-text">
                 Побудовано на React.js (TS) із Google Auth та Firestore. Приймає

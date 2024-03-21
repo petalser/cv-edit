@@ -139,5 +139,3 @@ export const signalData = signal({
     description: "",
   },
 });
-
-console.log(Object.keys(signalData.value));
