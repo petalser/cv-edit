@@ -1,9 +1,5 @@
 import { signalData } from "./signals/data";
-import {
-  isPanelEnabled,
-  isTooltipEnabled,
-  isModalEnabled,
-} from "./signals/states";
+import { isPanelEnabled, isTooltipEnabled, modalType } from "./signals/states";
 import Tooltip from "./components/Tooltip";
 import { showInput } from "./utils/showInput";
 import { useSignals } from "@preact/signals-react/runtime";
@@ -19,8 +15,7 @@ const data = signalData.value;
 function App() {
   useSignals();
 
-  const [dataProps, setDataProps] = useState(null);
-  const [modalType, setModalType] = useState("dynamic");
+  const [targetID, setTargetID] = useState(null);
 
   effect(() => {
     const tooltipTrigger = (event) => {
@@ -34,22 +29,24 @@ function App() {
     };
   });
 
-  const handleShowCard = (obj, type) => {
-    isModalEnabled.value = true;
-    setDataProps(obj);
-    setModalType(type);
-    console.log("DataProps: " + JSON.stringify(obj));
+  const handleShowCard = (id, type) => {
+    setTargetID(id);
+
+    modalType.value = type;
+    console.log("handler");
   };
 
   return (
     <>
       <Suspense fallback={<div>Loading</div>}>
-        <Modal
-          show={isModalEnabled.value}
-          onHide={() => (isModalEnabled.value = false)}
-          dataProps={dataProps}
-          modalType={modalType}
-        />
+        {modalType.value !== "blank" && (
+          <Modal
+            show={modalType.value !== "blank"}
+            onHide={() => (modalType.value = "blank")}
+            id={targetID}
+            modalType={modalType.value}
+          />
+        )}
         {isPanelEnabled.value && <Panel />}
       </Suspense>
 
@@ -159,11 +156,25 @@ function App() {
           <div className="row d-flex">
             <div
               id="project_1"
+              style={{ border: "3px solid black" }}
               className="col"
-              onClick={() => handleShowCard(data.project_1, "static")}
+              onClick={(e) => handleShowCard(e.target.id, "static")}
             >
-              <h4 className="card-title">PasswordStash</h4>
-              <p className="card-text">
+              <h4
+                className="card-title"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleShowCard(e.target.closest("div").id, "static");
+                }}
+              >
+                PasswordStash
+              </h4>
+              <p
+                className="card-text"
+                onClick={(e) =>
+                  handleShowCard(e.target.parentNode.id, "static")
+                }
+              >
                 Побудовано на React.js (TS) із Google Auth та Firestore. Приймає
                 текст, шифрує &#34;секретом&#34;, зберігає у БД.
                 <br />
@@ -171,6 +182,9 @@ function App() {
                   href="https://passwordstash.netlify.app/"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={(e) =>
+                    handleShowCard(e.target.parentNode.id, "static")
+                  }
                 >
                   Лінк
                 </a>

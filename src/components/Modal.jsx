@@ -1,49 +1,18 @@
-import { Modal, Button } from "react-bootstrap";
-import { useState, useEffect, useCallback } from "react";
+import React, { Suspense } from "react";
 
-const ModalComp = ({ show, onHide, dataProps, modalType }) => {
-  const [contentBody, setContentBody] = useState(null);
+const ModalWrapper = ({ show, onHide, id, modalType }) => {
+  // Capitalize "modalType" to construct the component filename
+  const modalName = `Modal${modalType.charAt(0).toUpperCase()}${modalType.slice(
+    1
+  )}`;
 
-  const renderContent = useCallback(
-    async (prop) => {
-      let module;
-      switch (modalType) {
-        case "static":
-          module = await import("../utils/editStatic");
-          return module.default(prop);
-        case "dynamic":
-          module = await import("../utils/editDynamic");
-          return module.default(prop);
-        case "json":
-          module = await import("../utils/editJSON");
-          return module.default(prop);
-        default:
-          throw new Error(`Requested type does not exist`);
-      }
-    },
-    [modalType]
-  );
-
-  useEffect(() => {
-    renderContent(dataProps).then((res) => setContentBody(res));
-  }, [dataProps, renderContent]);
+  const Modal = React.lazy(() => import(`./${modalName}.jsx`));
 
   return (
-    <Modal show={show} onHide={onHide}>
-      <Modal.Header closeButton>
-        <Modal.Title>
-          {modalType === "json" ? "Edit JSON" : "Edit module"}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{contentBody}</Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          Close
-        </Button>
-        <Button variant="primary">Save Changes</Button>
-      </Modal.Footer>
-    </Modal>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Modal show={show} onHide={onHide} id={id} modalType={modalType} />
+    </Suspense>
   );
 };
 
-export default ModalComp;
+export default ModalWrapper;

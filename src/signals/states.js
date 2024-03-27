@@ -6,7 +6,7 @@ export const isTooltipEnabled = signal(true);
 
 export const isExported = signal(false);
 
-export const isModalEnabled = signal(false);
+export const modalType = signal("blank");
 
 effect(() => {
   if (isExported.value) {

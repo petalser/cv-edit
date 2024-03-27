@@ -1,6 +1,6 @@
 import Save2PDFButton from "./Save2PDFButton";
 import { signalData } from "../signals/data";
-import { isModalEnabled } from "../signals/states";
+import { modalType } from "../signals/states";
 import "../styles/Panel.css";
 
 const Panel = () => {
@@ -10,7 +10,7 @@ const Panel = () => {
       <button className="btn text-light">Edit JSON</button>
       <button
         className="btn text-light"
-        onClick={() => (isModalEnabled.value = true)}
+        onClick={() => (modalType.value = "static")}
       >
         Show
       </button>
