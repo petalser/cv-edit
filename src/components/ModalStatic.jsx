@@ -6,9 +6,8 @@ const ModalStatic = ({ show, onHide, id, modalType }) => {
   //chunk of global data object
   const dataChunk = signalData.value[id];
 
-  const [data, setData] = useState(dataChunk);
+  const [data, setData] = useState({ ...dataChunk });
 
-  console.log("modal static fired");
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -37,7 +36,10 @@ const ModalStatic = ({ show, onHide, id, modalType }) => {
                 className="form-control"
                 value={data[item].value}
                 onChange={(e) =>
-                  setData({ ...data, [data[item].value]: e.target.value })
+                  setData((prev) => ({
+                    ...prev,
+                    [item]: { ...prev[item], value: e.target.value },
+                  }))
                 }
                 key={index}
               />
@@ -49,7 +51,15 @@ const ModalStatic = ({ show, onHide, id, modalType }) => {
         <Button variant="secondary" onClick={onHide}>
           Cancel
         </Button>
-        <Button variant="primary">Save Changes</Button>
+        <Button
+          variant="primary"
+          onClick={() => {
+            signalData.value = { ...signalData.value, [id]: data };
+            onHide();
+          }}
+        >
+          Save Changes
+        </Button>
       </Modal.Footer>
     </Modal>
   );
