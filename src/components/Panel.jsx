@@ -1,20 +1,29 @@
+import { Button, ButtonGroup } from "react-bootstrap";
 import Save2PDFButton from "./Save2PDFButton";
 import { signalData } from "../signals/data";
 import { modalType } from "../signals/states";
-import "../styles/Panel.css";
 
 const Panel = () => {
   return (
-    <aside className="sidebar">
-      <Save2PDFButton name={signalData.value.name.value} />
-      <button className="btn text-light">Edit JSON</button>
-      <button
-        className="btn text-light"
-        onClick={() => (modalType.value = "static")}
+    <ButtonGroup className="position-absolute" vertical>
+      <Save2PDFButton />
+      <Button
+        variant="secondary"
+        onClick={() => {
+          modalType.value = "json";
+        }}
       >
-        Show
-      </button>
-    </aside>
+        Edit JSON
+      </Button>
+      <Button
+        variant="secondary"
+        onClick={() => {
+          navigator.clipboard.writeText(JSON.stringify(signalData.value));
+        }}
+      >
+        Clipboard JSON
+      </Button>
+    </ButtonGroup>
   );
 };
 
