@@ -8,9 +8,11 @@ const ModalWrapper = ({ show, onHide, id, modalType }) => {
 
   const Modal = React.lazy(() => import(`./${modalName}.jsx`));
 
+  const notJson = modalType != "json";
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Modal show={show} onHide={onHide} id={id} modalType={modalType} />
+      <Modal show={show} onHide={onHide} {...(notJson && { id })} />
     </Suspense>
   );
 };
