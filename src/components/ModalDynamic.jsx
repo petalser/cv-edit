@@ -3,7 +3,7 @@ import { Trash } from "react-bootstrap-icons";
 import { signalData } from "../signals/data";
 import { useState, useEffect } from "react";
 
-const ModalDynamic = ({ show, onHide, id, modalType }) => {
+const ModalDynamic = ({ show, onHide, id }) => {
   //chunk of global data object
   const dataChunk = signalData.value[id].values;
   const [firstPlaceholder, secondPlaceholder] =

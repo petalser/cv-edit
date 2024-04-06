@@ -2,7 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 import { signalData } from "../signals/data";
 import { useState } from "react";
 
-const ModalStatic = ({ show, onHide, id, modalType }) => {
+const ModalStatic = ({ show, onHide, id }) => {
   //chunk of global data object
   const dataChunk = signalData.value[id];
 
@@ -11,9 +11,7 @@ const ModalStatic = ({ show, onHide, id, modalType }) => {
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>
-          {modalType === "json" ? "Edit JSON" : "Edit module"}
-        </Modal.Title>
+        <Modal.Title>Edit module</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="row">
