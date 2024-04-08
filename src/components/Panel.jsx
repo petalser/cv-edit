@@ -1,11 +1,20 @@
 import { Button, ButtonGroup } from "react-bootstrap";
 import Save2PDFButton from "./Save2PDFButton";
 import { signalData } from "../signals/data";
-import { modalType } from "../signals/states";
+import { isPanelHovered, modalType } from "../signals/states";
 
 const Panel = () => {
   return (
-    <ButtonGroup className="position-absolute" vertical>
+    <ButtonGroup
+      className="position-absolute"
+      onMouseEnter={() => {
+        isPanelHovered.value = true;
+      }}
+      onmouseleave={() => {
+        isPanelHovered.value = false;
+      }}
+      vertical
+    >
       <Save2PDFButton />
       <Button
         variant="secondary"
