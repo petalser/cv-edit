@@ -1,6 +1,13 @@
 import { signalData } from "./signals/data";
-import { isPanelEnabled, isTooltipEnabled, modalType } from "./signals/states";
+import {
+  isPanelEnabled,
+  isPanelHovered,
+  isTooltipEnabled,
+  isExported,
+  modalType,
+} from "./signals/states";
 import Tooltip from "./components/Tooltip";
+import Card from "./components/Card";
 import { showInput } from "./utils/showInput";
 import { useSignals } from "@preact/signals-react/runtime";
 import { effect } from "@preact/signals-react";
@@ -10,22 +17,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Panel = React.lazy(() => import("./components/Panel"));
 const Modal = React.lazy(() => import("./components/Modal"));
 
-const data = signalData.value;
-
 function App() {
   useSignals();
+  let data = signalData.value;
 
   const [targetID, setTargetID] = useState(null);
 
   effect(() => {
-    const tooltipTrigger = (event) => {
-      isPanelEnabled.value = event.clientX < 30;
+    const panelTrigger = (event) => {
+      isPanelEnabled.value = event.clientX < 30 || isPanelHovered.value;
     };
 
-    window.addEventListener("mousemove", tooltipTrigger);
+    window.addEventListener("mousemove", panelTrigger);
 
     return () => {
-      window.removeEventListener("mousemove", tooltipTrigger);
+      window.removeEventListener("mousemove", panelTrigger);
     };
   });
 
@@ -153,75 +159,22 @@ function App() {
             </div>
           </div>
 
-          <div className="row d-flex">
-            <div
-              id="project_1"
-              style={{ border: "3px solid black" }}
-              className="col"
-              onClick={(e) => handleShowCard(e.target.id, "static")}
-            >
-              <h4
-                className="card-title"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleShowCard(e.target.closest("div").id, "static");
-                }}
-              >
-                PasswordStash
-              </h4>
-              <p
-                className="card-text"
-                onClick={(e) =>
-                  handleShowCard(e.target.parentNode.id, "static")
-                }
-              >
-                Побудовано на React.js (TS) із Google Auth та Firestore. Приймає
-                текст, шифрує &#34;секретом&#34;, зберігає у БД.
-                <br />
-                <a
-                  href="https://passwordstash.netlify.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) =>
-                    handleShowCard(e.target.parentNode.id, "static")
-                  }
-                >
-                  Лінк
-                </a>
-              </p>
-            </div>
-
-            <div className="col">
-              <h4 className="card-title">News</h4>
-              <p className="card-text">
-                Побудовано з React.js та Sass у чорно-білому стилі. Пошук новин
-                з вибором мови.
-                <br />
-                <a
-                  href="https://rapid-news-react.netlify.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Лінк
-                </a>
-              </p>
-            </div>
-
-            <div className="col">
-              <h4 className="card-title">Quiz</h4>
-              <p className="card-text">
-                Побудовано (знов) з React.js та Bootstrap. Натисніть
-                &#34;Start&#34; та перевірте себе!
-                <br />
-                <a
-                  href="https://tangerine-twilight-004269.netlify.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Лінк
-                </a>
-              </p>
-            </div>
+          <div className="row d-flex flex-row">
+            <Card
+              content={data.project_1}
+              isExported={isExported.value}
+              handleClick={() => handleShowCard("project_1", "static")}
+            />
+            <Card
+              content={data.project_2}
+              isExported={isExported.value}
+              handleClick={() => handleShowCard("project_2", "static")}
+            />
+            <Card
+              content={data.project_3}
+              isExported={isExported.value}
+              handleClick={() => handleShowCard("project_3", "static")}
+            />
           </div>
 
           <p></p>
