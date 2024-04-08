@@ -2,6 +2,8 @@ import { signal, effect } from "@preact/signals-react";
 
 export const isPanelEnabled = signal(false);
 
+export const isPanelHovered = signal(false);
+
 export const isTooltipEnabled = signal(true);
 
 export const isExported = signal(false);
