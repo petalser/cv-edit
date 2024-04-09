@@ -8,6 +8,14 @@ const ModalStatic = ({ show, onHide, id }) => {
 
   const [data, setData] = useState({ ...dataChunk });
 
+  const linkCheck = (item) => {
+    console.log(data[item].value);
+    if (item !== "link") {
+      return true;
+    }
+    return data[item].value.startsWith("http");
+  };
+
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -16,27 +24,37 @@ const ModalStatic = ({ show, onHide, id }) => {
       <Modal.Body>
         <div className="row">
           <div className="col">
-            {Object.keys(dataChunk).map((item, index) => (
+            {Object.entries(dataChunk).map(([key, item], index) => (
               <label
-                htmlFor={item}
-                className="form-label d-flex justify-content-end"
+                htmlFor={key}
+                className="form-label d-flex justify-content-end p-1"
+                style={
+                  !linkCheck(key)
+                    ? {
+                        outline: "1px solid red",
+                        boxShadow: "0 0 0 0.3rem rgba(255, 0, 0, 0.25)",
+                        borderRadius: "0.25rem",
+                      }
+                    : {}
+                }
                 key={index}
               >
-                {data[item].description}
+                {item.description}
               </label>
             ))}
           </div>
+
           <div className="col">
-            {Object.keys(dataChunk).map((item, index) => (
+            {Object.entries(dataChunk).map(([key, item], index) => (
               <input
                 type="text"
-                id={item}
+                id={key}
                 className="form-control"
-                value={data[item].value}
+                value={data[key].value}
                 onChange={(e) =>
                   setData((prev) => ({
                     ...prev,
-                    [item]: { ...prev[item], value: e.target.value },
+                    [key]: { ...prev[key], value: e.target.value },
                   }))
                 }
                 key={index}
