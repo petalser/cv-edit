@@ -23,22 +23,19 @@ const ModalDynamic = ({ show, onHide, id }) => {
     setData(updatedValue);
   };
 
+  const handleRemove = (index) => {
+    const updatedValue = data.filter((_, i) => i != index);
+    setData(updatedValue);
+  };
+
   const handleChange = (indexOne, indexTwo, value) => {
     const updatedValue = [...data];
     updatedValue[indexOne][indexTwo] = value;
     setData(updatedValue);
   };
 
-  const handleRemove = (index) => {
-    const updatedValue = data.filter((_, i) => i != index);
-    setData(updatedValue);
-  };
-
   const handleSave = () => {
-    signalData.value = {
-      ...signalData.value,
-      [[id].values]: data,
-    };
+    signalData.value[id].values = data;
   };
 
   return (
