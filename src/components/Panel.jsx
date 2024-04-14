@@ -10,7 +10,7 @@ const Panel = () => {
       onMouseEnter={() => {
         isPanelHovered.value = true;
       }}
-      onMouseleave={() => {
+      onMouseLeave={() => {
         isPanelHovered.value = false;
       }}
       vertical
