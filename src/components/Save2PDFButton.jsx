@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap";
 import { signalData } from "../signals/data";
 import html2pdf from "html2pdf.js";
 import { isExported } from "../signals/states";
@@ -25,9 +26,9 @@ const Save2PDFButton = () => {
   };
 
   return (
-    <button className="btn" onClick={handleSave} disabled={isExported.value}>
+    <Button variant="primary" onClick={handleSave} disabled={isExported.value}>
       Save as PDF
-    </button>
+    </Button>
   );
 };
 
