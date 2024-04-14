@@ -1,0 +1,19 @@
+h1 {
+  font-size: 2rem;
+}
+
+h2,
+h3 {
+  font-size: 1.4rem;
+}
+
+.hoverFX {
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hoverFX:hover {
+  background-color: rgb(200, 255, 200);
+  box-shadow: 0 0 0 0.3rem rgb(200, 255, 200);
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
