@@ -10,6 +10,7 @@ export const showInput = (e) => {
   inputField.type = "text";
   inputField.value = parent.value;
   inputField.placeholder = parent.description;
+  inputField.classList.add("form-control", "me-2");
 
   e.target.textContent = "";
 
