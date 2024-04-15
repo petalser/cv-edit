@@ -3,14 +3,14 @@ import { signalData } from "../signals/data";
 const data = signalData.value;
 
 export const showInput = (e) => {
-  const inputField = document.createElement("input");
   const parentId = e.target.id;
   const parent = data[parentId];
-
+  const inputField = document.createElement("input");
   inputField.type = "text";
-  inputField.value = parent.value;
+  console.log(inputField);
   inputField.placeholder = parent.description;
   inputField.classList.add("form-control", "me-2");
+  inputField.value = parent.value;
 
   e.target.textContent = "";
 
@@ -19,7 +19,7 @@ export const showInput = (e) => {
   inputField.focus();
 
   const inputListener = () => {
-    parent.value = inputField.value;
+    parent.value = inputField.textContent;
   };
 
   const blurListener = () => {
