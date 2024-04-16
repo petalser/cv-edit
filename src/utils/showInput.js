@@ -3,34 +3,35 @@ import { signalData } from "../signals/data";
 const data = signalData.value;
 
 export const showInput = (e) => {
-  const parentId = e.target.id;
-  const parent = data[parentId];
-  const inputField = document.createElement("input");
-  inputField.type = "text";
-  console.log(inputField);
-  inputField.placeholder = parent.description;
-  inputField.classList.add("form-control", "me-2");
-  inputField.value = parent.value;
+  if (e.target.tagName !== "INPUT") {
+    const parentId = e.target.id;
+    const parent = data[parentId];
+    const inputField = document.createElement("input");
+    inputField.type = "text";
+    inputField.placeholder = parent.description;
+    inputField.classList.add("form-control", "me-2");
+    inputField.value = parent.value;
 
-  e.target.textContent = "";
+    e.target.textContent = "";
 
-  e.target.appendChild(inputField);
+    e.target.appendChild(inputField);
 
-  inputField.focus();
+    inputField.focus();
 
-  const inputListener = () => {
-    parent.value = inputField.textContent;
-  };
+    const inputListener = () => {
+      parent.value = inputField.value;
+    };
 
-  const blurListener = () => {
-    inputField.removeEventListener("input", inputListener);
-    inputField.removeEventListener("blur", blurListener);
+    const blurListener = () => {
+      inputField.removeEventListener("input", inputListener);
+      inputField.removeEventListener("blur", blurListener);
 
-    e.target.removeChild(inputField);
-    e.target.textContent = parent.value;
-  };
+      e.target.removeChild(inputField);
+      e.target.textContent = parent.value;
+    };
 
-  inputField.addEventListener("input", inputListener);
+    inputField.addEventListener("input", inputListener);
 
-  inputField.addEventListener("blur", blurListener);
+    inputField.addEventListener("blur", blurListener);
+  }
 };
