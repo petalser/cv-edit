@@ -121,15 +121,39 @@
     "value": "<strong>Irrelevant experience. </strong>I have previously held (for 10+ years) various roles both as an employee (in teams of different sizes) and as a self-employed person in various industries."
   },
   "experiencePeriodLatest": {
-    "role": "Web Developer",
-    "company": "Freelance",
-    "period": "2022-present",
-    "description": "Creating landing pages, web-portfolios and web-applications of any comlexity. Familiar with “Pixel Perfect”-methodology. Flexibility and accessibility – by default."
+    "role": {
+      "description": "Position",
+      "value": "Web Developer"
+    },
+    "company": {
+      "description": "Company",
+      "value": "Freelance"
+    },
+    "period": {
+      "description": "Period (e.g '1953-2002')",
+      "value": "2022-present"
+    },
+    "brief": {
+      "description": "Brief description",
+      "value": "Creating landing pages, web-portfolios and web-applications of any comlexity. Familiar with “Pixel Perfect”-methodology. Flexibility and accessibility – by default."
+    }
   },
-  "experiencePeriodPreviaus": {
-    "role": "Software Developer",
-    "company": "Freelance",
-    "period": "2021-2022",
-    "description": "Designing and developing python-based bots and desktop apps. Collecting and processing data."
+  "experiencePeriodPrevious": {
+    "role": {
+      "description": "Position",
+      "value": "Software Developer"
+    },
+    "company": {
+      "description": "Company",
+      "value": "Freelance"
+    },
+    "period": {
+      "description": "Period (e.g '1953-2002')",
+      "value": "2021-2022"
+    },
+    "brief": {
+      "description": "Brief description",
+      "value": "Designing and developing python-based bots and desktop apps. Collecting and processing data."
+    }
   }
 }

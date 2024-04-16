@@ -121,15 +121,39 @@
     "value": "<strong>Нерелевантний досвід.</strong> Протягом останніх 10 років я займав різноманітні посади у кількох галузях, також успішно працював сам"
   },
   "experiencePeriodLatest": {
-    "role": "Web Developer",
-    "company": "Freelance",
-    "period": "2022-present",
-    "description": "Побудова лендінгів і різноманітних додатків (також окремих компонентів) Маю досвід з “Pixel Perfect”, у фокусі - гнучкість, зручність та доступність"
+    "role": {
+      "description": "Position",
+      "value": "Web Developer"
+    },
+    "company": {
+      "description": "Company",
+      "value": "Freelance"
+    },
+    "period": {
+      "description": "Period (e.g '1953-2002')",
+      "value": "2022-present"
+    },
+    "brief": {
+      "description": "Brief description",
+      "value": "Creating landing pages, web-portfolios and web-applications of any comlexity. Familiar with “Pixel Perfect”-methodology. Flexibility and accessibility – by default."
+    }
   },
-  "experiencePeriodPreviaus": {
-    "role": "Software Developer",
-    "company": "Freelance",
-    "period": "2021-2022",
-    "description": "Розробка ботів та малих десктоп-додатків (переважно на python). Обробка даних за потреби."
+  "experiencePeriodPrevious": {
+    "role": {
+      "description": "Position",
+      "value": "Software Developer"
+    },
+    "company": {
+      "description": "Company",
+      "value": "Freelance"
+    },
+    "period": {
+      "description": "Period (e.g '1953-2002')",
+      "value": "2021-2022"
+    },
+    "brief": {
+      "description": "Brief description",
+      "value": "Designing and developing python-based bots and desktop apps. Collecting and processing data."
+    }
   }
 }

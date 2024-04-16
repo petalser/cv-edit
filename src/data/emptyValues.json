@@ -112,15 +112,15 @@
     "value": ""
   },
   "experiencePeriodLatest": {
-    "role": "",
-    "company": "",
-    "period": "",
-    "description": ""
+    "role": { "description": "Position", "value": "" },
+    "company": { "description": "Company", "value": "" },
+    "period": { "description": "Period (e.g '1953-2002')", "value": "" },
+    "brief": { "description": "Brief description", "value": "" }
   },
-  "experiencePeriodPreviaus": {
-    "role": "",
-    "company": "",
-    "period": "",
-    "description": ""
+  "experiencePeriodPrevious": {
+    "role": { "description": "Position", "value": "" },
+    "company": { "description": "Company", "value": "" },
+    "period": { "description": "Period (e.g '1953-2002')", "value": "" },
+    "brief": { "description": "Brief description", "value": "" }
   }
 }
