@@ -58,48 +58,36 @@ function App() {
       <main id="pageContent" className={`container`}>
         <header className="row">
           <div className="col-md-7 text-start">
-            <h1 id="name" className="hoverFX" onClick={(e) => showInput(e)}>
+            <h1 id="name" className="hoverFX" onClick={showInput}>
               {/* First and last name */}
               {data.name.value}
             </h1>
 
-            <h2 id="role" className="hoverFX" onClick={(e) => showInput(e)}>
+            <h2 id="role" className="hoverFX" onClick={showInput}>
               {/* Role */}
               {data.role.value}
             </h2>
 
-            <p id="education" className="hoverFX" onClick={(e) => showInput(e)}>
+            <p id="education" className="hoverFX boldText" onClick={showInput}>
               {/* Education */}
-              <strong>{data.education.value}</strong>
+              {data.education.value}
             </p>
           </div>
 
           <div className="col-md-5 text-end">
-            <span
-              id="contactLink_1"
-              className="hoverFX"
-              onClick={(e) => showInput(e)}
-            >
+            <span id="contactLink_1" className="hoverFX" onClick={showInput}>
               {/* Contacts[] */}
               {data.contactLink_1.value}
             </span>
             <br />
 
-            <span
-              id="contactLink_2"
-              className="hoverFX"
-              onClick={(e) => showInput(e)}
-            >
+            <span id="contactLink_2" className="hoverFX" onClick={showInput}>
               {/* Contacts[] */}
               {data.contactLink_2.value}
             </span>
             <br />
 
-            <span
-              id="contactLink_3"
-              className="hoverFX"
-              onClick={(e) => showInput(e)}
-            >
+            <span id="contactLink_3" className="hoverFX" onClick={showInput}>
               {/* Contacts[] */}
               {data.contactLink_3.value}
             </span>
@@ -110,7 +98,7 @@ function App() {
           <h3
             id="summaryTitle"
             className="text-center hoverFX"
-            onClick={(e) => showInput(e)}
+            onClick={showInput}
           >
             {/* Summary title */}
             {data.summaryTitle.value}
@@ -119,7 +107,7 @@ function App() {
           <p
             id="summaryText"
             className="text-center hoverFX"
-            onClick={(e) => showInput(e)}
+            onClick={showInput}
           >
             {/* Summary itself */}
             {data.summaryText.value}
@@ -128,11 +116,7 @@ function App() {
 
         <section className="row">
           <div className="col-md-7">
-            <h3
-              id="stackTitle"
-              className=" hoverFX"
-              onClick={(e) => showInput(e)}
-            >
+            <h3 id="stackTitle" className=" hoverFX" onClick={showInput}>
               {/* Title for stack section */}
               {data.stackTitle.value}
             </h3>
@@ -143,7 +127,7 @@ function App() {
               {/* Stack section filler */}
               {data.stackList.values.map((item, key) => {
                 return (
-                  <p key={key} className="mb-0 hoverFX">
+                  <p key={key} className="mb-0">
                     <strong>{item[0]}</strong>
                     {/* add whitespace */}
                     {` ${item[1]}`}
@@ -155,11 +139,7 @@ function App() {
           </div>
 
           <div className="col-md-5 text-end">
-            <h3
-              id="langTitle"
-              className=" hoverFX"
-              onClick={(e) => showInput(e)}
-            >
+            <h3 id="langTitle" className=" hoverFX" onClick={showInput}>
               {/* Title for languages section */}
               {data.langTitle.value}
             </h3>
@@ -185,18 +165,27 @@ function App() {
         <section>
           <div className="row">
             <div className="col-md-12 text-center">
-              <h3 id="projectsSectionTitle" onClick={(e) => showInput(e)}>
+              <h3
+                id="projectsSectionTitle"
+                className="hoverFX"
+                onClick={showInput}
+              >
                 {/* Title for projects section */}
                 {data.projectsSectionTitle.value}
               </h3>
               {/* Projects section summary (if provided) */}
               {data.projectsSectionSummary.value && (
-                <span id="projectsSectionSummary" onClick={(e) => showInput(e)}>
+                <span
+                  id="projectsSectionSummary"
+                  className="hoverFX"
+                  onClick={showInput}
+                >
                   {data.projectsSectionSummary.value}
                 </span>
               )}
             </div>
           </div>
+
           {/* Projects itself */}
           <div className="row d-flex flex-row">
             <Card
@@ -216,29 +205,33 @@ function App() {
             />
           </div>
         </section>
-
         <section>
-          {/* Title for experience section */}
-          <h3 className="text-center">{data.experienceTitle.value}</h3>
-          {/* Summary for experience section (if provided) */}
-          {data.experienceSubtitle.value && (
-            <p>{data.experienceSubtitle.value}</p>
-          )}
-          <p>
-            <strong>Frontend Dev</strong> WebCrafters (2023-сьогодні)
-          </p>
-          <li className="mb-2">
-            Як молодший розробник, я будую окремі React-компоненти для існуючих
-            додатків, виконую ручне тестування та інші мануальні задачі.
-          </li>
-          <p>
-            <strong>Web Developer</strong> Freelance (2022-2023)
-          </p>
-          <li className="mb-2">
-            Розробляв веб-додатки різноманітного маштабу від крихітних лендінгів
-            до сайтів із широким функціоналом. Гнучкість, респонсивність та
-            доступність - основні приоритети.
-          </li>
+          <div className="row d-flex flex-row">
+            {/* Title for experience section */}
+            <h3 className="text-center hoverFX" onClick={showInput}>
+              {data.experienceTitle.value}
+            </h3>
+            {/* Summary for experience section (if provided) */}
+            {data.experienceSubtitle.value && (
+              <p className="hoverFX text-center">
+                {data.experienceSubtitle.value}
+              </p>
+            )}
+            <Card
+              content={data.experiencePeriodLatest}
+              isExported={isExported.value}
+              handleClick={() =>
+                handleShowCard("experiencePeriodLatest", "static")
+              }
+            />
+            <Card
+              content={data.experiencePeriodPrevious}
+              isExported={isExported.value}
+              handleClick={() =>
+                handleShowCard("experiencePeriodPrevious", "static")
+              }
+            />
+          </div>
         </section>
       </main>
     </>
