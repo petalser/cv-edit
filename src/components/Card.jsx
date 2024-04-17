@@ -2,7 +2,6 @@ import { Card, Button } from "react-bootstrap";
 import { useState } from "react";
 
 const CardComponent = ({ content, handleClick }) => {
-  console.log(content);
   const handleClickWrapper = (e) => {
     if (e.target.tagName === "A") {
       e.preventDefault();

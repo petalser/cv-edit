@@ -26,7 +26,11 @@ const Save2PDFButton = () => {
   };
 
   return (
-    <Button variant="primary" onClick={handleSave} disabled={isExported.value}>
+    <Button
+      variant="secondary"
+      onClick={handleSave}
+      disabled={isExported.value}
+    >
       Save as PDF
     </Button>
   );

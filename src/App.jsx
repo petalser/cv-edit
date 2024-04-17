@@ -26,13 +26,15 @@ function App() {
   const [targetID, setTargetID] = useState(null);
 
   effect(() => {
-    const panelTrigger = (event) => {
-      isPanelEnabled.value = event.clientX < 30 || isPanelHovered.value;
-    };
-    window.addEventListener("mousemove", panelTrigger);
-    return () => {
-      window.removeEventListener("mousemove", panelTrigger);
-    };
+    if (modalType.value === "blank") {
+      const panelTrigger = (event) => {
+        isPanelEnabled.value = event.clientX < 30 || isPanelHovered.value;
+      };
+      window.addEventListener("mousemove", panelTrigger);
+      return () => {
+        window.removeEventListener("mousemove", panelTrigger);
+      };
+    }
   });
 
   const handleShowCard = (id, type) => {
@@ -42,7 +44,7 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={<div>Loading</div>}>
+      <Suspense fallback={<></>}>
         {modalType.value !== "blank" && (
           <Modal
             show={modalType.value !== "blank"}
