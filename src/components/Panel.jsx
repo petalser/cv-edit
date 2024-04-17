@@ -6,7 +6,8 @@ import { isPanelHovered, modalType } from "../signals/states";
 const Panel = () => {
   return (
     <ButtonGroup
-      className="position-absolute"
+      style={{ zIndex: 1100 }}
+      className="position-fixed"
       onMouseEnter={() => {
         isPanelHovered.value = true;
       }}
